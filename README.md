@@ -1,5 +1,28 @@
 # Payload Website Template
 
+## Локальный запуск
+
+1. Скопировать переменные окружения: `cp .env.example .env` (в `.env` уже должен быть `DATABASE_URL=mongodb://127.0.0.1/...`)
+2. Запустить MongoDB (локально её нет — используется Docker, конфиг в `docker-compose.yml`):
+
+   ```bash
+   docker compose up -d mongo
+   ```
+
+3. Установить зависимости и запустить dev-сервер:
+
+   ```bash
+   pnpm install
+   pnpm dev
+   ```
+
+4. Открыть `http://localhost:3000` — при первом входе в админку нужно создать первого admin-пользователя.
+
+Основные адреса:
+
+- `http://localhost:3000/admin` — админ-панель Payload CMS (`src/app/(payload)/admin`). Здесь управляется весь контент сайта: страницы (`pages`), посты (`posts`), медиа (`media`), пользователи (`users`), города (`cities`), парки (`parks`), категории (`categories`) и переводы (`translations`). Также через неё доступны черновики/превью, SEO-поля и REST/GraphQL API.
+- `http://localhost:3000/drivers` — публичный лендинг набора водителей (`src/app/(frontend)/drivers`). Состоит из: шапки с CTA, блока преимуществ, формы заявки «стать водителем» (`DriversForm` с выбором города и валидацией телефона), списка парков по городам (`ParksPart`: Ташкент, Самарканд, Бухара), инфо-аккордеона и футера со ссылкой на приложение водителя. Тексты берутся из переводов (`getTranslations`), парки и города — из БД через `getParks`.
+
 This is the official [Payload Website Template](https://github.com/payloadcms/payload/blob/3.x/templates/website). Use it to power websites, blogs, or portfolios from small to enterprise. This repo includes a fully-working backend, enterprise-grade admin panel, and a beautifully designed, production-ready website.
 
 This template is right for you if you are working on:
